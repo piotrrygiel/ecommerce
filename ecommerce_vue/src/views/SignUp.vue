@@ -59,6 +59,9 @@ export default {
       errors: []
     }
   },
+  mounted() {
+    document.title = 'Sign Up | PeakPursuit'
+  },
   methods: {
     submitForm() {
       this.errors = []
