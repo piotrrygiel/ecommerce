@@ -68,3 +68,15 @@ class Product(models.Model):
 
     def get_category_name(self):
         return self.category.name
+
+
+class Size(models.Model):
+    product = models.ForeignKey(Product, related_name='sizes', on_delete=models.CASCADE)
+    size = models.DecimalField(max_digits=3, decimal_places=1)
+    quantity = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        unique_together = ('product', 'size')
+
+    def __str__(self):
+        return f"{self.product.name} - size {self.size}"

@@ -1,8 +1,19 @@
 from rest_framework import serializers
-from .models import Category, Product
+from .models import Category, Product, Size
+
+
+class SizeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Size
+        fields = (
+            "size",
+            "quantity",
+        )
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    sizes = SizeSerializer(many=True)
+
     class Meta:
         model = Product
         fields = (
@@ -13,7 +24,8 @@ class ProductSerializer(serializers.ModelSerializer):
             "price",
             "get_image",
             "get_thumbnail",
-            "get_category_name"
+            "get_category_name",
+            "sizes",
         )
 
 

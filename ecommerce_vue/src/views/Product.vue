@@ -16,6 +16,14 @@
 
         <p><strong>Price: </strong>${{ product.price }}</p>
 
+
+        <div class="box">Available sizes:
+          <ul>
+            <li v-for="size in product.sizes" v-bind:key="size.size">{{ size.size }} (only {{ size.quantity }} left)
+            </li>
+          </ul>
+        </div>
+
         <div class="field has-addons mt-6">
           <div class="control">
             <input type="number" class="input" min="1" v-model="quantity">
