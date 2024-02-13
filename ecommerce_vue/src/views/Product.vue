@@ -17,11 +17,18 @@
         <p><strong>Price: </strong>${{ product.price }}</p>
 
 
-        <div class="box">Available sizes:
-          <ul>
-            <li v-for="size in product.sizes" v-bind:key="size.size">{{ size.size }} (only {{ size.quantity }} left)
-            </li>
-          </ul>
+        <div class="field mt-6">
+          <label class="label">Select size:</label>
+          <div class="control">
+            <div class="select">
+              <select v-model="selectedSize">
+                <option disabled value="">Please select a size</option>
+                <option v-for="size in product.sizes" v-bind:key="size.size" v-bind:value="size.size">
+                  {{ size.size }}
+                </option>
+              </select>
+            </div>
+          </div>
         </div>
 
         <div class="field has-addons mt-6">
@@ -47,7 +54,8 @@ export default {
   data() {
     return {
       product: {},
-      quantity: 1
+      quantity: 1,
+      selectedSize: ''
     }
   },
   mounted() {
@@ -78,8 +86,21 @@ export default {
         this.quantity = 1
       }
 
+      if (!this.selectedSize) {
+        toast({
+          message: "Please select a size",
+          type: "is-danger",
+          dismissible: true,
+          pauseOnHover: true,
+          duration: 2000,
+          position: "bottom-right",
+        })
+        return
+      }
+
       const item = {
         product: this.product,
+        size: this.selectedSize,
         quantity: this.quantity
       }
 

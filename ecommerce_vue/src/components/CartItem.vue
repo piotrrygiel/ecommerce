@@ -1,6 +1,7 @@
 <template>
   <tr>
     <td><router-link :to="item.product.get_absolute_url">{{ item.product.name }}</router-link></td>
+    <td>{{ item.size }} US</td>
     <td>${{ item.product.price }}</td>
     <td>
       {{ item.quantity }}

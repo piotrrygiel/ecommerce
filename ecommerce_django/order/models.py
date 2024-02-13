@@ -17,7 +17,7 @@ class Order(models.Model):
     stripe_token = models.CharField(max_length=100)
 
     class Meta:
-        ordering = ['-created_at',]
+        ordering = ['-created_at', ]
 
     def __str__(self):
         return self.first_name
